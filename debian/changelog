@@ -1,0 +1,12 @@
+imgopt (1.0-1ppa1) precise; urgency=low
+
+  * Added support for specifiying multiple file names
+    in the command line
+
+ -- Vladimir Kolesnikov <vladimir@extrememember.com>  Sat, 06 Apr 2013 13:45:00 +0300
+
+imgopt (0.1-1ppa1) hardy; urgency=low
+
+  * Initial release
+
+ -- Vladimir Kolesnikov <vladimir@extrememember.com>  Sun, 29 Nov 2009 00:24:12 +0000

@@ -1,0 +1,13 @@
+Source: imgopt
+Section: misc
+Priority: optional
+Maintainer: Vladimir Kolesnikov <vladimir@extrememember.com>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.9.3
+Vcs-Git: git://github.com/extrememember/imgopt.git
+
+Package: imgopt
+Architecture: any
+Depends: ${misc:Depends}, advancecomp, gifsicle, optipng, libjpeg-progs, imagemagick, pngcrush
+Description: Lossless GIF/PNG/JPG optimization
+ imgopt is an optimizer for GIF/PNG/JPG files
