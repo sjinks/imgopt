@@ -9,16 +9,18 @@ for i in "$@"; do
 		continue;
 	fi
 
-	TYPE=`identify "$i" | grep -E -o 'JPEG|GIF|PNG'`
-	OLD=`stat -c %s "$i"`
+	TYPE=$(identify "$i" | grep -E -o 'JPEG|GIF|PNG')
+	OLD=$(stat -c %s "$i")
 
 	case "$TYPE" in
 		JPEG)
-			jpegtran -copy none -optimize -perfect -progressive -outfile "$i.tmp" "$i"
-			jpegtran -copy none -optimize -perfect -outfile "$i.tmq" "$i"
+			TMP1=$(mktemp imgopt.XXXXXXXXXX)
+			TMP2=$(mktemp imgopt.XXXXXXXXXX)
+			jpegtran -copy none -optimize -perfect -progressive -outfile "$TMP1" "$i"
+			jpegtran -copy none -optimize -perfect -outfile "$TMP2" "$i"
 			if [ -s "$i.tmp" -a -s "$i.tmq" ]; then
-				S_PROG=`stat -c %s "$i.tmp"`
-				S_NORM=`stat -c %s "$i.tmq"`
+				S_PROG=$(stat -c %s "$i.tmp")
+				S_NORM=$(stat -c %s "$i.tmq")
 				if [ $S_PROG -ge $S_NORM ]; then
 					mv -f "$i.tmq" "$i"
 					rm -f "$i.tmp"
@@ -45,6 +47,6 @@ for i in "$@"; do
 		;;
 	esac
 
-	NEW=`stat -c %s "$i"`
+	NEW=$(stat -c %s "$i")
 	echo "$i, old size: $OLD, new size: $NEW"
 done
