@@ -27,7 +27,7 @@ for i in "$@"; do
 				else
 					mv -f "$TMP_PROG" "$i"
 					rm -f "$TMP_NORM"
-				fi;
+				fi
 			fi
 		;;
 
@@ -42,7 +42,7 @@ for i in "$@"; do
 				mv -f "$TMP" "$i"
 			else
 				rm -f "$TMP"
-			fi;
+			fi
 
 			optipng -zc6-9 -zm1-9 -zs0-3 -f0-5 -q -fix "$i"
 			advpng -z -4 -q "$i"
