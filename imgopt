@@ -16,6 +16,8 @@ for i in "$@"; do
 		JPEG)
 			TMP_PROG=$(mktemp imgopt.XXXXXXXXXX)
 			TMP_NORM=$(mktemp imgopt.XXXXXXXXXX)
+			trap "{ rm -f \"$TMP_PROG\" \"$TMP_NORM\"; exit $?; }" INT TERM EXIT
+
 			jpegtran -copy none -optimize -perfect -progressive -outfile "$TMP_PROG" "$i"
 			jpegtran -copy none -optimize -perfect -outfile "$TMP_NORM" "$i"
 			if [ -s "$TMP_NORM" -a -s "$TMP_PROG" ]; then
@@ -29,6 +31,8 @@ for i in "$@"; do
 					rm -f "$TMP_NORM"
 				fi
 			fi
+
+			trap - INT TERM EXIT
 		;;
 
 		GIF)
@@ -37,12 +41,16 @@ for i in "$@"; do
 
 		PNG)
 			TMP=$(mktemp imgopt.XXXXXXXXXX)
+			trap "{ rm -f \"$TMP\"; exit $?; }" INT TERM EXIT
+
 			pngcrush -q -rem alla -fix "$i" "$TMP"
 			if [ -s "$TMP" ]; then
 				mv -f "$TMP" "$i"
 			else
 				rm -f "$TMP"
 			fi
+
+			trap - INT TERM EXIT
 
 			optipng -zc6-9 -zm1-9 -zs0-3 -f0-5 -q -fix "$i"
 			advpng -z -4 -q "$i"
