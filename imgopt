@@ -14,19 +14,19 @@ for i in "$@"; do
 
 	case "$TYPE" in
 		JPEG)
-			TMP1=$(mktemp imgopt.XXXXXXXXXX)
-			TMP2=$(mktemp imgopt.XXXXXXXXXX)
-			jpegtran -copy none -optimize -perfect -progressive -outfile "$TMP1" "$i"
-			jpegtran -copy none -optimize -perfect -outfile "$TMP2" "$i"
-			if [ -s "$i.tmp" -a -s "$i.tmq" ]; then
-				S_PROG=$(stat -c %s "$i.tmp")
-				S_NORM=$(stat -c %s "$i.tmq")
+			TMP_PROG=$(mktemp imgopt.XXXXXXXXXX)
+			TMP_NORM=$(mktemp imgopt.XXXXXXXXXX)
+			jpegtran -copy none -optimize -perfect -progressive -outfile "$TMP_PROG" "$i"
+			jpegtran -copy none -optimize -perfect -outfile "$TMP_NORM" "$i"
+			if [ -s "$TMP_NORM" -a -s "$TMP_PROG" ]; then
+				S_PROG=$(stat -c %s "$TMP_PROG")
+				S_NORM=$(stat -c %s "$TMP_NORM")
 				if [ $S_PROG -ge $S_NORM ]; then
-					mv -f "$i.tmq" "$i"
-					rm -f "$i.tmp"
+					mv -f "$TMP_NORM" "$i"
+					rm -f "$TMP_PROG"
 				else
-					mv -f "$i.tmp" "$i"
-					rm -f "$i.tmq"
+					mv -f "$TMP_PROG" "$i"
+					rm -f "$TMP_NORM"
 				fi;
 			fi
 		;;
@@ -36,12 +36,14 @@ for i in "$@"; do
 		;;
 
 		PNG)
-			pngcrush -q -rem alla -fix "$i" "$i.tmp"
-			if [ -s "$i.tmp" ]; then
-				mv -f "$i.tmp" "$i"
+			TMP=$(mktemp imgopt.XXXXXXXXXX)
+			pngcrush -q -rem alla -fix "$i" "$TMP"
+			if [ -s "$TMP" ]; then
+				mv -f "$TMP" "$i"
 			else
-				rm -f "$i.tmp"
+				rm -f "$TMP"
 			fi;
+
 			optipng -zc6-9 -zm1-9 -zs0-3 -f0-5 -q -fix "$i"
 			advpng -z -4 -q "$i"
 		;;
