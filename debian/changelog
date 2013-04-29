@@ -1,4 +1,4 @@
-imgopt (1.0-2ppa1) precise; urgency=low
+imgopt (1.0.1-1ppa1) precise; urgency=low
 
   * Added missing debian/install
 
