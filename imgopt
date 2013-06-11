@@ -33,9 +33,6 @@ for i in "$@"; do
 			fi
 
 			trap - INT TERM EXIT
-
-			# https://github.com/tjko/jpegoptim
-			jpegoptim -q --strip-all "$i"
 		;;
 
 		GIF)
@@ -58,9 +55,7 @@ for i in "$@"; do
 			optipng -zc6-9 -zm1-9 -zs0-3 -f0-5 -q -fix "$i"
 			advpng -z -4 -q "$i"
 
-			# http://advsys.net/ken/util/pngout.htm
-			# http://www.jonof.id.au/pngout
-			pngout "$i"
+			[ -x pngout ] && pngout "$i"
 		;;
 	esac
 
