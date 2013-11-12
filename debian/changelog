@@ -1,3 +1,9 @@
+imgopt (1.0.2-1ppa1) precise; urgency=low
+
+  * Use pngout if it is available (thanks to crigon https://crigon.name/)
+
+ -- Vladimir Kolesnikov <vladimir@extrememember.com>  Tue, 11 Jun 2013 18:12:34 +0300
+
 imgopt (1.0.1-1ppa1) precise; urgency=low
 
   * Added missing debian/install
