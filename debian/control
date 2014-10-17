@@ -1,10 +1,10 @@
 Source: imgopt
 Section: misc
 Priority: optional
-Maintainer: Vladimir Kolesnikov <vladimir@extrememember.com>
+Maintainer: Volodymyr Kolesnykov <volodymyr@wildwolf.name>
 Build-Depends: debhelper (>= 7.0.50~)
-Standards-Version: 3.9.3
-Vcs-Git: git://github.com/extrememember/imgopt.git
+Standards-Version: 3.9.5
+Vcs-Git: git://github.com/sjinks/imgopt.git
 
 Package: imgopt
 Architecture: any
