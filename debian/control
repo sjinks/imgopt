@@ -7,7 +7,7 @@ Standards-Version: 3.9.5
 Vcs-Git: git://github.com/sjinks/imgopt.git
 
 Package: imgopt
-Architecture: any
+Architecture: all
 Depends: ${misc:Depends}, advancecomp, gifsicle, optipng, libjpeg-progs, imagemagick, pngcrush
 Description: Lossless GIF/PNG/JPG optimization
  imgopt is an optimizer for GIF/PNG/JPG files
