@@ -1,3 +1,9 @@
+imgopt (1.0.2-1ppa2) trusty; urgency=low
+
+  * Architecture is all, not any
+
+ -- Volodymyr Kolesnykov <volodymyr@wildwolf.name>  Tue, 28 Oct 2014 08:55:00 +0200
+
 imgopt (1.0.2-1ppa1) trusty; urgency=low
 
   * Trusty
