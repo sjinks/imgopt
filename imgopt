@@ -24,9 +24,11 @@ for i in "$@"; do
 				S_PROG=$(stat -c %s "$TMP_PROG")
 				S_NORM=$(stat -c %s "$TMP_NORM")
 				if [ $S_PROG -ge $S_NORM ]; then
+					chmod --reference="$i" "$TMP_NORM"
 					mv -f "$TMP_NORM" "$i"
 					rm -f "$TMP_PROG"
 				else
+					chmod --reference="$i" "$TMP_PROG"
 					mv -f "$TMP_PROG" "$i"
 					rm -f "$TMP_NORM"
 				fi
@@ -45,6 +47,7 @@ for i in "$@"; do
 
 			pngcrush -q -rem alla -fix "$i" "$TMP"
 			if [ -s "$TMP" ]; then
+				chmod --reference="$i" "$TMP"
 				mv -f "$TMP" "$i"
 			else
 				rm -f "$TMP"
